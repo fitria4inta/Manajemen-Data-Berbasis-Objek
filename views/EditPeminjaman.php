@@ -26,43 +26,81 @@ if(isset($_POST['update'])) {
     header("Location: ListPeminjaman.php");
 }
 ?>
-<h2>Edit Data Peminjaman</h2>
-<form method="POST">
-Anggota :
-<select name="id_anggota" required>
-    <option value="">Pilih Anggota</option>
-    <?php 
-    $anggota = $dataAnggota;
-    while($angg = $anggota->fetch_assoc()) { 
-        $selected = ($angg['id_anggota'] == $row['id_anggota']) ? 'selected' : '';
-    ?>
-        <option value="<?= $angg['id_anggota']; ?>" <?= $selected; ?>><?= $angg['kode_anggota']; ?> - <?= $angg['nama_anggota']; ?></option>
-    <?php } ?>
-</select>
-<br><br>
-Buku :
-<select name="id_buku" required>
-    <option value="">Pilih Buku</option>
-    <?php 
-    $buku = $dataBuku;
-    while($bk = $buku->fetch_assoc()) { 
-        $selected = ($bk['id_buku'] == $row['id_buku']) ? 'selected' : '';
-    ?>
-        <option value="<?= $bk['id_buku']; ?>" <?= $selected; ?>><?= $bk['kode_buku']; ?> - <?= $bk['judul_buku']; ?></option>
-    <?php } ?>
-</select>
-<br><br>
-Tanggal Pinjam :
-<input type="date" name="tanggal_pinjam" value="<?= $row['tanggal_pinjam']; ?>" required>
-<br><br>
-Tanggal Kembali :
-<input type="date" name="tanggal_kembali" value="<?= $row['tanggal_kembali']; ?>" required>
-<br><br>
-Status :
-<select name="status" required>
-    <option value="Dipinjam" <?= $row['status'] == 'Dipinjam' ? 'selected' : ''; ?>>Dipinjam</option>
-    <option value="Dikembalikan" <?= $row['status'] == 'Dikembalikan' ? 'selected' : ''; ?>>Dikembalikan</option>
-</select>
-<br><br>
-<button type="submit" name="update">Update</button>
-</form>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Peminjaman - Perpustakaan</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✏️ Edit Data Peminjaman</h1>
+            <p>Perbarui informasi peminjaman</p>
+        </div>
+        
+        <div class="content">
+            <div class="form-container">
+                <form method="POST">
+                    <div class="form-group">
+                        <label>Pilih Anggota</label>
+                        <select name="id_anggota" required>
+                            <option value="">-- Pilih Anggota --</option>
+                            <?php 
+                            $anggota = $dataAnggota;
+                            while($angg = $anggota->fetch_assoc()) { 
+                                $selected = ($angg['id_anggota'] == $row['id_anggota']) ? 'selected' : '';
+                            ?>
+                                <option value="<?= $angg['id_anggota']; ?>" <?= $selected; ?>>
+                                    <?= $angg['kode_anggota']; ?> - <?= $angg['nama_anggota']; ?>
+                                </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Pilih Buku</label>
+                        <select name="id_buku" required>
+                            <option value="">-- Pilih Buku --</option>
+                            <?php 
+                            $buku = $dataBuku;
+                            while($bk = $buku->fetch_assoc()) { 
+                                $selected = ($bk['id_buku'] == $row['id_buku']) ? 'selected' : '';
+                            ?>
+                                <option value="<?= $bk['id_buku']; ?>" <?= $selected; ?>>
+                                    <?= $bk['kode_buku']; ?> - <?= $bk['judul_buku']; ?> (Stok: <?= $bk['stok']; ?>)
+                                </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Tanggal Pinjam</label>
+                        <input type="date" name="tanggal_pinjam" value="<?= $row['tanggal_pinjam']; ?>" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Tanggal Kembali</label>
+                        <input type="date" name="tanggal_kembali" value="<?= $row['tanggal_kembali']; ?>" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select name="status" required>
+                            <option value="Dipinjam" <?= $row['status'] == 'Dipinjam' ? 'selected' : ''; ?>>📖 Dipinjam</option>
+                            <option value="Dikembalikan" <?= $row['status'] == 'Dikembalikan' ? 'selected' : ''; ?>>✅ Dikembalikan</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" name="update" class="btn btn-primary">🔄 Update</button>
+                        <a href="ListPeminjaman.php" class="btn btn-back">← Kembali</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
