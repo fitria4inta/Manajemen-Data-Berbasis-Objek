@@ -18,25 +18,61 @@ if(isset($_POST['update'])) {
     header("Location: ListBuku.php");
 }
 ?>
-<h2>Edit Data Buku</h2>
-<form method="POST">
-Kode Buku :
-<input type="text" name="kode_buku" value="<?= $row['kode_buku']; ?>" required>
-<br><br>
-Judul Buku :
-<input type="text" name="judul_buku" value="<?= $row['judul_buku']; ?>" required>
-<br><br>
-Penulis :
-<input type="text" name="penulis" value="<?= $row['penulis']; ?>" required>
-<br><br>
-Penerbit :
-<input type="text" name="penerbit" value="<?= $row['penerbit']; ?>" required>
-<br><br>
-Tahun Terbit :
-<input type="number" name="tahun_terbit" value="<?= $row['tahun_terbit']; ?>" required>
-<br><br>
-Stok :
-<input type="number" name="stok" value="<?= $row['stok']; ?>" required>
-<br><br>
-<button type="submit" name="update">Update</button>
-</form>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Buku - Perpustakaan</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✏️ Edit Data Buku</h1>
+            <p>Perbarui informasi buku</p>
+        </div>
+        
+        <div class="content">
+            <div class="form-container">
+                <form method="POST">
+                    <div class="form-group">
+                        <label>Kode Buku</label>
+                        <input type="text" name="kode_buku" value="<?= $row['kode_buku']; ?>" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Judul Buku</label>
+                        <input type="text" name="judul_buku" value="<?= $row['judul_buku']; ?>" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Penulis</label>
+                        <input type="text" name="penulis" value="<?= $row['penulis']; ?>" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Penerbit</label>
+                        <input type="text" name="penerbit" value="<?= $row['penerbit']; ?>" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Tahun Terbit</label>
+                        <input type="number" name="tahun_terbit" value="<?= $row['tahun_terbit']; ?>" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Stok</label>
+                        <input type="number" name="stok" value="<?= $row['stok']; ?>" required>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" name="update" class="btn btn-primary">🔄 Update</button>
+                        <a href="ListBuku.php" class="btn btn-back">← Kembali</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
